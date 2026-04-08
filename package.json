@@ -1,0 +1,23 @@
+{
+  "name": "playwrightomg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "watch:login": "playwright test tests/login.spec.js -g \"successful login with valid username and password\" --headed --workers=1",
+    "watch:all": "playwright test tests/login.spec.js --headed --workers=1",
+    "auth:state": "playwright test tests/auth.setup.spec.js --headed --workers=1",
+    "test:project-creation": "playwright test tests/project-creation.spec.js --headed --workers=1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2"
+  }
+}

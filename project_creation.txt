@@ -1,0 +1,136 @@
+I already have a Playwright login test implemented in this project.
+
+Do NOT recreate the login flow.
+
+Instead, reuse the existing authenticated session using storageState or any existing login setup already present in the project.
+
+Use the existing project structure and follow Page Object Model (POM). If page objects already exist, reuse them. If not, create or extend page objects in a clean and maintainable way instead of writing everything directly inside the test file.
+
+Create Playwright tests for project creation, including 1 positive scenario and 2 negative scenarios.
+
+General Requirements:
+- Use Playwright
+- Follow Page Object Model (POM)
+- Reuse existing page objects/helpers where possible
+- Use existing authenticated session
+- Do not duplicate login logic
+- Use Playwright best practices
+- Use robust locators such as getByRole, getByLabel, getByText where possible
+- Add proper waits and assertions
+- Keep the code clean, reusable, and well-structured
+- If storageState is used, ensure the test starts already logged in
+- Prefer exact validation text where possible
+- Do not use unnecessary hardcoded waits unless absolutely needed
+
+Scenario 1: Positive - Successful Project Creation
+
+Navigation:
+Login then 
+- Click on "Planning"
+- Click on "Projects"
+- Wait for Projects page to load
+- Click on "New Project"
+- Wait for project creation page/modal to open
+
+Business Area:
+- Click "Select Business Area"
+- Select/check "IT"
+- Click "Apply"
+
+Project Details:
+- Enter Title: "KK Project Creation"
+
+Billing:
+- Scroll if needed
+- Select Billing Entity: "Britvic Customer Management Convenience"
+- Select Billing Contact: "Chandra Adari"
+
+Dates:
+- Set External Deadline to today’s date
+- Close the date picker
+- Set End Date to today’s date
+
+Final:
+- Click "Save"
+- Wait for project creation to complete
+
+Validation:
+- Verify toast message:
+  "Your project has been created successfully."
+- Use a robust assertion to confirm the toast is visible
+
+Scenario 2: Negative - Missing Title
+
+Navigation:
+- Click on "Planning"
+- Click on "Projects"
+- Wait for Projects page to load
+- Click on "New Project"
+- Wait for project creation page/modal to open
+
+Business Area:
+- Click "Select Business Area"
+- Select/check "IT"
+- Click "Apply"
+
+Project Details:
+- Leave Title empty
+
+Billing:
+- Scroll if needed
+- Select Billing Entity: "Britvic Customer Management Convenience"
+- Select Billing Contact: "Chandra Adari"
+
+Dates:
+- Set External Deadline to today’s date
+- Close the date picker
+- Set End Date to today’s date
+
+Final:
+- Click "Save"
+
+Validation:
+- Verify validation error message appears:
+  "You need to fill in the following fields : Title"
+- Verify project is NOT created
+
+Scenario 3: Negative - End Date Before External Deadline
+
+Navigation:
+- Click on "Planning"
+- Click on "Projects"
+- Wait for Projects page to load
+- Click on "New Project"
+- Wait for project creation page/modal to open
+
+Business Area:
+- Click "Select Business Area"
+- Select/check "IT"
+- Click "Apply"
+
+Project Details:
+- Enter Title: "Negative Test Project"
+
+Billing:
+- Scroll if needed
+- Select Billing Entity: "Britvic Customer Management Convenience"
+- Select Billing Contact: "Chandra Adari"
+
+Dates:
+- Set External Deadline to today’s date
+- Close the date picker
+- Set End Date to yesterday’s date
+
+Final:
+- Click "Save"
+
+Validation:
+- Verify validation error message appears:
+  "The end date cannot be before the start date"
+- Verify project is NOT created
+
+Please generate the tests in a clean POM-based structure.
+Suggested separation:
+- page object for navigation and project creation actions
+- spec file for assertions and scenarios
+- reuse existing auth/session setup

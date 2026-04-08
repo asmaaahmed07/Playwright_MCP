@@ -1,0 +1,82 @@
+First inspect the page in browser/devtools context and determine exact locators before generating the framework.
+
+Act as a QA automation engineer. Do not guess selectors blindly.
+
+First inspect the DOM of this login page and identify the most reliable Playwright locators before writing any code.
+
+Application URL:
+https://clarendon.omg.qa.oliver.solutions/login
+
+Actual login flow:
+1. Open the login page
+2. Find the username/email input field
+3. Click it and enter: kamran.khan@jintech.com
+4. Find and click the Next button
+5. Wait for the password step to appear
+6. Find the password input field
+7. Click it and enter: Letmein@123
+8. Find and click the Sign in button
+
+Instructions:
+- First analyze the page structure
+- Identify exact stable locators for:
+  - username/email field
+  - Next button
+  - password field
+  - Sign in button
+  - validation messages
+  - error messages
+  - loading/transition state between steps
+- Prefer locator strategy in this order:
+  1. getByRole
+  2. getByLabel
+  3. getByPlaceholder
+  4. data-testid
+  5. CSS/XPath only if nothing better exists
+- Avoid brittle selectors
+- If any locator is uncertain, clearly mark it with comment: VERIFY SELECTOR
+
+After locator analysis, generate a complete Playwright framework using Page Object Model.
+
+Framework output must include:
+1. playwright.config.js
+2. pages/LoginPage.js
+3. tests/login.spec.js
+
+In LoginPage.js include reusable methods for:
+- goto()
+- enterUsername(username)
+- clickNext()
+- enterPassword(password)
+- clickSignIn()
+- login(username, password)
+- getUsernameValidationMessage()
+- getPasswordValidationMessage()
+- getLoginErrorMessage()
+- isPasswordMasked()
+
+Test coverage required:
+
+Positive scenarios:
+- successful login with valid username and password
+- username step transitions correctly to password step
+- password field is masked
+
+Negative scenarios:
+- click Next with empty username
+- invalid email/username format
+- unregistered username
+- click Sign in with empty password
+- wrong password
+- validation and error message verification
+- verify user stays on login flow when credentials are invalid
+
+Requirements:
+- Generate complete runnable code, not pseudo code
+- Use Playwright best practices
+- Use meaningful assertions
+- Add waits only where truly needed
+- Keep code clean, scalable, and beginner-friendly
+- At the top, first list the locators selected and why
+- If login success redirects to another page, assert URL change or a visible post-login element
+- If post-login element is unknown, add a clearly marked placeholder comment for me to verify
