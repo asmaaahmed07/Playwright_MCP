@@ -13,9 +13,9 @@ const fs = require('fs');
     console.log(text, 'count=', count);
   }
   const buttons = await page.locator('button').allInnerTexts();
-  console.log('Buttons:', buttons.slice(0, 30));
+  console.log('Buttons:', buttons.slice(0, 90));
   const labels = await page.locator('label').allInnerTexts();
-  console.log('Labels:', labels.slice(0, 40));
+  console.log('Labels:', labels.slice(0, 50));
   await page.screenshot({ path: 'debug_project_create.png', fullPage: true });
   await browser.close();
 })();
